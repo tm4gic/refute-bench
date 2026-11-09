@@ -42,21 +42,44 @@ negatives, precision is undefined and "always say DEFECT" wins.
 ## The headline result: the baselines are hard to beat
 
 ```
-system                 bal-acc    acc          95% CI   prec    rec     F1
---------------------------------------------------------------------------
-baseline:keyword          0.60   0.53    [0.38, 0.72]   0.86   0.48   0.62
-baseline:always-yes       0.50   0.78    [0.62, 0.91]   0.78   1.00   0.88
-baseline:always-no        0.50   0.22    [0.09, 0.38]    nan   0.00    nan
-baseline:random           0.47   0.41    [0.25, 0.56]   0.75   0.36   0.49
+system                 bal-acc    acc          95% CI   prec    rec     F1   expl
+----------------------------------------------------------------------------------
+claude-cli:default        0.92   0.88    [0.75, 0.97]   1.00   0.84   0.91   0.95
+baseline:keyword          0.60   0.53    [0.38, 0.72]   0.86   0.48   0.62   0.00
+baseline:always-yes       0.50   0.78    [0.62, 0.91]   0.78   1.00   0.88   0.00
+baseline:always-no        0.50   0.22    [0.09, 0.38]    nan   0.00    nan     —
+baseline:random           0.47   0.41    [0.25, 0.56]   0.75   0.36   0.49   0.00
+
+balanced accuracy, 95% CI:  claude 0.92 [0.84, 0.98] · keyword 0.60 [0.39, 0.78]
+judge calibration: ceiling 100%, floor 12% -> USABLE
 ```
 
 **`always-yes` scores an F1 of 0.88 while knowing nothing**, because the set is
-78% positive. Any paper, blog post or eval harness reporting F1 on an imbalanced
-set without this comparison is reporting the class balance.
+78% positive — higher than the keyword baseline and only 0.03 below a real
+model. Any paper, blog post or eval harness reporting F1 on an imbalanced set
+without this comparison is reporting the class balance.
 
 That is why the headline metric here is **balanced accuracy**, which pins both
 trivial strategies at exactly 0.50. The number to beat is **0.60** — twenty
 lines of regex.
+
+On that metric a real model does clear the bar: **0.92 [0.84, 0.98]**, with the
+keyword baseline at 0.60 [0.39, 0.78] well outside the interval. The detail that
+matters more than the headline is **precision 1.00 — zero false alarms on all
+seven clean controls.** Recall is the weaker side at 0.84: it missed four, and
+three of those were `hard`. Accuracy falls cleanly with difficulty — 100% easy,
+93% medium, 79% hard — which is weak evidence the difficulty labels mean
+something.
+
+### The benchmark contained the defect it tests for
+
+The first version of the verdict logic picked the best baseline by F1 and then
+compared **raw accuracy** against it. `always-yes` scores 0.78 raw accuracy from
+class balance alone, which sits inside the model's confidence interval — so the
+harness printed *"not distinguishable from a constant answer"* about a detector
+scoring 0.92 balanced. The comparison used exactly the gameable metric the rest
+of the project exists to warn about. Fixed to compare balanced accuracy, with
+the positive and negative pools bootstrapped separately.
 
 ---
 

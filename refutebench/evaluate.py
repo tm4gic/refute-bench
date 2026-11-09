@@ -150,3 +150,23 @@ def breakdown(s: Scores) -> str:
             out.append(f"  {diff:<26}{d['hit']}/{d['n']}  "
                        f"{d['hit']/d['n']:.0%}")
     return "\n".join(out)
+
+
+def balanced_ci(items: list[Item], s: Scores, n_boot: int = 10_000,
+                seed: int = 0) -> tuple[float, float]:
+    """Bootstrap CI for balanced accuracy.
+
+    Resamples the positive and negative pools SEPARATELY, because balanced
+    accuracy is the mean of two class-conditional rates. Resampling the pooled
+    set would let a draw contain almost no negatives and make the interval
+    meaningless on a set with only 7 of them.
+    """
+    pos_correct = np.array([1.0] * s.tp + [0.0] * s.fn)
+    neg_correct = np.array([1.0] * s.tn + [0.0] * s.fp)
+    if not len(pos_correct) or not len(neg_correct):
+        return float("nan"), float("nan")
+    rng = np.random.default_rng(seed)
+    p = rng.choice(pos_correct, size=(n_boot, len(pos_correct)), replace=True).mean(axis=1)
+    n = rng.choice(neg_correct, size=(n_boot, len(neg_correct)), replace=True).mean(axis=1)
+    draws = (p + n) / 2
+    return tuple(np.percentile(draws, [2.5, 97.5]))

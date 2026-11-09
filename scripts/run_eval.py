@@ -74,21 +74,33 @@ def main() -> int:
             print(evaluate.breakdown(s))
 
     # ---- the comparison that decides whether anything was learned ---------
+    # Compare on BALANCED accuracy, not raw accuracy.
+    #
+    # The first version of this block picked the best baseline by F1 and then
+    # tested raw accuracy against it — which is exactly the gameable metric the
+    # rest of the benchmark exists to warn about. always-yes posts acc 0.78 on a
+    # 78%-positive set purely from class balance, so a genuinely good detector
+    # was reported as "not distinguishable" from a constant answer. Fixed, and
+    # recorded here because the benchmark should not contain the defect class it
+    # tests for.
     base = max((s for s in scored if s.provider.startswith("baseline:")),
-               key=lambda s: s.f1 if s.f1 == s.f1 else -1, default=None)
+               key=lambda s: (s.balanced_accuracy
+                              if s.balanced_accuracy == s.balanced_accuracy else -1),
+               default=None)
     real = [s for s in scored if not s.provider.startswith("baseline:")]
     print("\n" + "-" * 72)
     if base:
-        print(f"best baseline: {base.provider}  F1 {base.f1:.2f}  "
-              f"acc {base.accuracy:.2f} [{base.ci[0]:.2f}, {base.ci[1]:.2f}]")
+        print(f"best baseline: {base.provider}  "
+              f"balanced-acc {base.balanced_accuracy:.2f}  (raw acc {base.accuracy:.2f})")
     for s in real:
-        if base and s.ci[0] <= base.accuracy <= s.ci[1]:
-            print(f"{s.provider}: accuracy {s.accuracy:.2f} — the best "
-                  f"baseline sits INSIDE its CI. Not distinguishable.")
-        elif base:
-            d = "above" if s.accuracy > base.accuracy else "below"
-            print(f"{s.provider}: accuracy {s.accuracy:.2f} — {d} the best "
-                  f"baseline, CI excludes it.")
+        lo, hi = evaluate.balanced_ci(items, s)
+        inside = lo <= base.balanced_accuracy <= hi if base else False
+        print(f"{s.provider}: balanced-acc {s.balanced_accuracy:.2f} "
+              f"[{lo:.2f}, {hi:.2f}]"
+              + (" — best baseline INSIDE the interval. Not distinguishable."
+                 if inside else
+                 f" — baseline {base.balanced_accuracy:.2f} is outside it."
+                 if base else ""))
     if not real:
         print("baselines only. Add --systems to test a model against them.")
     print(f"\nn = {len(items)}. Intervals are wide by construction; treat "

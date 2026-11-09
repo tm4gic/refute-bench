@@ -1,0 +1,58 @@
+
+REFUTE-BENCH
+32 items · 25 with a defect, 7 clean · 20 defect classes · easy=3 medium=15 hard=14
+
+calibrating judge (claude-cli:default) before trusting it
+  judge calibration on 8 probes: ceiling 100% (want >=80%), floor 12% (want <=20%) -> USABLE
+
+running claude-cli:default
+running baseline:always-yes
+running baseline:always-no
+running baseline:random
+running baseline:keyword
+
+========================================================================
+                                RESULTS                                 
+========================================================================
+system                 bal-acc    acc          95% CI   prec    rec     F1   expl  err
+--------------------------------------------------------------------------------------
+claude-cli:default        0.92   0.88    [0.75, 0.97]   1.00   0.84   0.91   0.95    0
+baseline:keyword          0.60   0.53    [0.38, 0.72]   0.86   0.48   0.62   0.00    0
+baseline:always-yes       0.50   0.78    [0.62, 0.91]   0.78   1.00   0.88   0.00    0
+baseline:always-no        0.50   0.22    [0.09, 0.38]    nan   0.00    nan     —     0
+baseline:random           0.47   0.41    [0.25, 0.56]   0.75   0.36   0.49   0.00    0
+
+claude-cli:default — by defect class
+  none                      7/7  #######
+  look_ahead                2/2  ##
+  multiple_comparisons      2/2  ##
+  clustering_noop           1/2  #.
+  units_benchmark           1/2  #.
+  stale_data                1/2  #.
+  vacuous_test              1/1  #
+  in_sample_shape           1/1  #
+  tie_allocation            1/1  #
+  grouping_collapse         1/1  #
+  wrong_valuation           1/1  #
+  optimistic_fill           1/1  #
+  selection_bias            1/1  #
+  truncation_bias           0/1  .
+  wrong_horizon             1/1  #
+  window_filter             1/1  #
+  orphan_records            1/1  #
+  reproducibility           1/1  #
+  cache_poisoning           1/1  #
+  asymmetric_convention     1/1  #
+  missing_baseline          1/1  #
+claude-cli:default — by difficulty
+  easy                      3/3  100%
+  medium                    14/15  93%
+  hard                      11/14  79%
+
+------------------------------------------------------------------------
+best baseline: baseline:always-yes  F1 0.88  acc 0.78 [0.62, 0.91]
+claude-cli:default: accuracy 0.88 — the best baseline sits INSIDE its CI. Not distinguishable.
+
+n = 32. Intervals are wide by construction; treat small gaps as noise.
+
+wrote results_claude.json
