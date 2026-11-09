@@ -1,0 +1,830 @@
+{
+ "summary": "32 items \u00b7 25 with a defect, 7 clean \u00b7 20 defect classes \u00b7 easy=3 medium=15 hard=14",
+ "judge_calibration": null,
+ "results": {
+  "baseline:always-yes": {
+   "accuracy": 0.78125,
+   "precision": 0.78125,
+   "recall": 1.0,
+   "f1": 0.8771929824561403,
+   "ci": [
+    0.625,
+    0.90625
+   ],
+   "errors": 0,
+   "explanation_accuracy": NaN,
+   "predictions": [
+    {
+     "id": "LOOKAHEAD-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "LOOKAHEAD-02",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "LOOKAHEAD-03",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "MULTCOMP-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "MULTCOMP-02",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "MULTCOMP-03",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLUSTER-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLUSTER-02",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "SELFTEST-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "SELFTEST-02",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "UNITS-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "UNITS-02",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "SEASONAL-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "TIES-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "GROUPKEY-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "MARK-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "FILL-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "SELECT-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "TRUNC-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "HORIZON-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "STALE-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "STALE-02",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "WINDOW-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "ORPHAN-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "REPRO-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CACHE-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "ASYM-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "BASELINE-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLEAN-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLEAN-02",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLEAN-03",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLEAN-04",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    }
+   ]
+  },
+  "baseline:always-no": {
+   "accuracy": 0.21875,
+   "precision": NaN,
+   "recall": 0.0,
+   "f1": NaN,
+   "ci": [
+    0.09375,
+    0.375
+   ],
+   "errors": 0,
+   "explanation_accuracy": NaN,
+   "predictions": [
+    {
+     "id": "LOOKAHEAD-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "LOOKAHEAD-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "LOOKAHEAD-03",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "MULTCOMP-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "MULTCOMP-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "MULTCOMP-03",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLUSTER-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLUSTER-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "SELFTEST-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "SELFTEST-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "UNITS-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "UNITS-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "SEASONAL-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "TIES-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "GROUPKEY-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "MARK-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "FILL-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "SELECT-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "TRUNC-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "HORIZON-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "STALE-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "STALE-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "WINDOW-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "ORPHAN-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "REPRO-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CACHE-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "ASYM-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "BASELINE-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLEAN-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLEAN-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLEAN-03",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLEAN-04",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    }
+   ]
+  },
+  "baseline:random": {
+   "accuracy": 0.40625,
+   "precision": 0.75,
+   "recall": 0.36,
+   "f1": 0.48648648648648657,
+   "ci": [
+    0.25,
+    0.5625
+   ],
+   "errors": 0,
+   "explanation_accuracy": NaN,
+   "predictions": [
+    {
+     "id": "LOOKAHEAD-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "LOOKAHEAD-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "LOOKAHEAD-03",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "MULTCOMP-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "MULTCOMP-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "MULTCOMP-03",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "CLUSTER-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "CLUSTER-02",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "SELFTEST-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "SELFTEST-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "UNITS-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "UNITS-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "SEASONAL-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "TIES-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "GROUPKEY-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "MARK-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "FILL-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "SELECT-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "TRUNC-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "HORIZON-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "STALE-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "STALE-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "WINDOW-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "ORPHAN-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "REPRO-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "CACHE-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "ASYM-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "BASELINE-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "CLEAN-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "CLEAN-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "CLEAN-03",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "CLEAN-04",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    }
+   ]
+  },
+  "baseline:keyword": {
+   "accuracy": 0.53125,
+   "precision": 0.8571428571428571,
+   "recall": 0.48,
+   "f1": 0.6153846153846153,
+   "ci": [
+    0.375,
+    0.71875
+   ],
+   "errors": 0,
+   "explanation_accuracy": NaN,
+   "predictions": [
+    {
+     "id": "LOOKAHEAD-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "LOOKAHEAD-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "LOOKAHEAD-03",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "MULTCOMP-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "MULTCOMP-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "MULTCOMP-03",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "CLUSTER-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "CLUSTER-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "SELFTEST-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "SELFTEST-02",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "UNITS-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "UNITS-02",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "SEASONAL-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "TIES-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "GROUPKEY-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "MARK-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "FILL-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "SELECT-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "TRUNC-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "HORIZON-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "STALE-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "STALE-02",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "WINDOW-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "ORPHAN-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "REPRO-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "CACHE-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "ASYM-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "BASELINE-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "CLEAN-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "CLEAN-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "CLEAN-03",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "CLEAN-04",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    }
+   ]
+  }
+ }
+}
