@@ -3,6 +3,7 @@ __pycache__/
 .venv/
 venv/
 .pytest_cache/
-results*.json
-!results_baselines.json
+# committed on purpose: the README cites these runs, and a benchmark whose
+# results are not in the repo is a claim rather than a result.
+results_scratch*.json
 .DS_Store
