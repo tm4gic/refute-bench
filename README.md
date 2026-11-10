@@ -1,6 +1,12 @@
 # refute-bench
 
-**Can a language model catch the bug that makes a research result wrong?**
+**Do you need a frontier model to catch the bug that makes a research result
+wrong — or will a free one running on your laptop do?**
+
+Short answer: you need the frontier model, and it is not close. An 8B model
+scores **below random guessing** on this task. The interesting part is *how*
+the small model fails, which only shows up once you grade the reasoning instead
+of the answer.
 
 A 32-item benchmark built from real methodology defects — look-ahead bias,
 uncontrolled multiple comparisons, units errors, self-selected comparison
@@ -80,26 +86,38 @@ That is roughly how a lot of impressive-sounding eval numbers are produced. The
 fix is boring: report **balanced accuracy**, which averages performance on each
 class separately and pins both constant strategies at exactly 0.50.
 
-### 2. A real model does clear the bar, and precision is where it wins
+### 2. The gap between a frontier model and a free one is enormous
 
 ```
-system                 bal-acc    acc          95% CI   prec    rec     F1   expl
-----------------------------------------------------------------------------------
-claude-cli:default        0.92   0.88    [0.75, 0.97]   1.00   0.84   0.91   0.95
-baseline:keyword          0.60   0.53    [0.38, 0.72]   0.86   0.48   0.62   0.00
-baseline:always-yes       0.50   0.78    [0.62, 0.91]   0.78   1.00   0.88   0.00
-baseline:always-no        0.50   0.22    [0.09, 0.38]    nan   0.00    nan     —
-baseline:random           0.47   0.41    [0.25, 0.56]   0.75   0.36   0.49   0.00
+system                 bal-acc         95% CI   prec    rec     F1   expl
+--------------------------------------------------------------------------
+claude-cli:default        0.92   [0.84, 0.98]   1.00   0.84   0.91   0.95
+baseline:keyword          0.60   [0.39, 0.78]   0.86   0.48   0.62   0.00
+baseline:always-yes       0.50   [0.50, 0.50]   0.78   1.00   0.88   0.00
+baseline:random           0.47              —   0.75   0.36   0.49   0.00
+ollama:llama3.1:8b        0.33   [0.13, 0.54]   0.60   0.24   0.34   0.17
 
-balanced accuracy, 95% CI:  claude 0.92 [0.84, 0.98] · keyword 0.60 [0.39, 0.78]
 judge calibration: ceiling 100%, floor 12% -> USABLE
 ```
 
-**Precision 1.00 is the result that matters.** Zero false alarms on all seven
-clean controls. A reviewer that cries wolf on correct code is worse than no
-reviewer, and this one never did.
+**llama3.1:8b lands at 0.33 — below random guessing, and well below twenty
+lines of regex.** Its confidence interval excludes the keyword baseline. It
+flagged only 10 of 32 items as defective where the truth is 25, and got just
+3 of 7 clean controls right, so it is not simply being cautious — it is wrong
+in both directions.
 
-Recall is the softer side at **0.84** — it missed four:
+Its difficulty profile is the tell: **0% on easy, 33% medium, 29% hard.** A
+model with real signal degrades as difficulty rises. A flat line that starts at
+zero is a model with no signal at all.
+
+The frontier model's profile does slope the right way — **100% easy, 93%
+medium, 79% hard** — which is weak evidence the difficulty labels track
+something real rather than being my guesses.
+
+**Precision 1.00 is the result that matters** for the frontier model: zero
+false alarms across all seven clean controls. A reviewer that cries wolf on
+correct code is worse than no reviewer. Recall is the softer side at 0.84 — it
+missed four, three of them `hard`:
 
 | missed | difficulty | why it is hard |
 |---|---|---|
@@ -108,9 +126,28 @@ Recall is the softer side at **0.84** — it missed four:
 | `stale_data` | hard | needs knowing one bar does not make a price level |
 | `units_benchmark` | medium | a 252-vs-365 annualization convention |
 
-Accuracy fell cleanly with difficulty — **100% easy, 93% medium, 79% hard** —
-which is weak evidence my difficulty labels track something real rather than
-being my own guesses.
+### 2b. The small model looked complementary. Grading the reasoning killed that.
+
+On the binary score, llama caught **two of the four items the frontier model
+missed** — `clustering_noop` and `units_benchmark`, both 2/2. Read the scoreboard
+alone and the obvious conclusion is that the models have complementary
+strengths and you should ensemble them.
+
+Here is what it actually said:
+
+| item | the real defect | llama's explanation |
+|---|---|---|
+| `CLUSTER-01` | a `groupby` that collapses nothing, so "clustered" equals unclustered | *"computes 36 t-statistics, which increases the likelihood of obtaining statistically significant results"* — that is multiple comparisons, a different defect |
+| `UNITS-02` | volatility indices annualize over 252 trading days, not 365 calendar days | *"using 365 assumes current market conditions are consistent with historical ones"* — not a real statement about anything |
+
+Both are scored as correct by any binary metric. Both are hollow. Its
+explanation accuracy across the board is **0.17** against the frontier model's
+**0.95** — so of the few defects it flags, it is describing the right mechanism
+roughly one time in six.
+
+**This is the single most useful thing the exercise produced.** A benchmark that
+only grades the verdict would have recommended ensembling a model that is
+guessing. The cost of finding that out was one extra grading pass.
 
 ### 3. Grading the explanation needs its own guard
 
@@ -147,6 +184,11 @@ writing it down does not stop you walking into it. The only thing that caught
 it was having the baselines there to produce an obviously absurd verdict.
 
 ---
+
+## Reproduce it
+
+Every number above comes from `results_claude.json` and `results_llama8b.json`
+in this repo, which contain all 32 predictions and explanations per system.
 
 ## Run it
 
@@ -208,8 +250,11 @@ Two smaller decisions that changed numbers:
   than reasoning about the code.
 - **Detection is not repair.** Nothing here measures whether a model can fix
   what it finds.
-- **One run.** No temperature sweep, no repeated sampling, so run-to-run
-  variance is unmeasured.
+- **One run per system.** No repeated sampling, so run-to-run variance is
+  unmeasured. The claude-vs-llama gap is far too large to be variance; the
+  claude-vs-keyword gap would survive it; nothing finer should be read.
+- **Two models is not a survey.** This says a frontier model beats an 8B model
+  badly. It does not locate the threshold — a 70B model might close most of it.
 
 New defect items are welcome, with one rule: it has to be a defect that
 actually happened, with the real number it changed.

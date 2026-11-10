@@ -1,0 +1,1040 @@
+{
+ "summary": "32 items \u00b7 25 with a defect, 7 clean \u00b7 20 defect classes \u00b7 easy=3 medium=15 hard=14",
+ "judge_calibration": {
+  "ceiling": 1.0,
+  "floor": 0.125,
+  "usable": true
+ },
+ "results": {
+  "ollama:llama3.1:8b": {
+   "accuracy": 0.28125,
+   "precision": 0.6,
+   "recall": 0.24,
+   "f1": 0.34285714285714286,
+   "ci": [
+    0.125,
+    0.4375
+   ],
+   "errors": 0,
+   "explanation_accuracy": 0.16666666666666666,
+   "predictions": [
+    {
+     "id": "LOOKAHEAD-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "The code uses historical data to log signals at the correct date and time, without any apparent defects."
+    },
+    {
+     "id": "LOOKAHEAD-02",
+     "has_defect": true,
+     "defect_class": "stale_input_data",
+     "why": "The code uses historical VIX data from the past 2 years to compute the volatility forecast for day t, which may not reflect the current market conditions."
+    },
+    {
+     "id": "LOOKAHEAD-03",
+     "has_defect": true,
+     "defect_class": "stale_input_data",
+     "why": "The code uses historical VIX data from the past 2 years to compute the volatility forecast for day t, which may not be available at decision time."
+    },
+    {
+     "id": "MULTCOMP-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "The code does not exhibit any of the specified methodology defects."
+    },
+    {
+     "id": "MULTCOMP-02",
+     "has_defect": false,
+     "defect_class": "why",
+     "why": "The code does not appear to have any of the methodology defects listed."
+    },
+    {
+     "id": "MULTCOMP-03",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "The code uses Benjamini-Hochberg procedure to control for FDR, which is a valid method for multiple comparisons."
+    },
+    {
+     "id": "CLUSTER-01",
+     "has_defect": true,
+     "defect_class": "multiple_comparisons",
+     "why": "The code computes 36 t-statistics (one for each ticker), which increases the likelihood of obtaining statistically significant results by chance."
+    },
+    {
+     "id": "CLUSTER-02",
+     "has_defect": true,
+     "defect_class": "correlated_observations",
+     "why": "The code treats hourly observations per session as independent, but they are likely correlated."
+    },
+    {
+     "id": "SELFTEST-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "The code appears to be correctly implementing a shuffle-label self-test with no apparent methodology defects."
+    },
+    {
+     "id": "SELFTEST-02",
+     "has_defect": false,
+     "defect_class": "shuffle_label_self_test",
+     "why": "The code correctly shuffles labels to create a null distribution for hypothesis testing."
+    },
+    {
+     "id": "UNITS-01",
+     "has_defect": true,
+     "defect_class": "optimistic_fill_assumptions",
+     "why": "The code assumes that the implied move is known at decision time, but in reality it's calculated from historical data."
+    },
+    {
+     "id": "UNITS-02",
+     "has_defect": true,
+     "defect_class": "stale_data",
+     "why": "Using 365 as the number of trading days per year assumes current market conditions are consistent with historical ones."
+    },
+    {
+     "id": "SEASONAL-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "The code does not appear to use any information that did not exist at decision time, and it correctly calculates implied variance based on clock time."
+    },
+    {
+     "id": "TIES-01",
+     "has_defect": false,
+     "defect_class": "why",
+     "why": "The code splits episodes into high and low score halves correctly without any apparent methodology defects."
+    },
+    {
+     "id": "GROUPKEY-01",
+     "has_defect": true,
+     "defect_class": "optimistic_fill_assumptions",
+     "why": "The code assumes that the first buy for each date-symbol pair is representative of all buys in that period."
+    },
+    {
+     "id": "MARK-01",
+     "has_defect": false,
+     "defect_class": "why",
+     "why": "The code uses only data that existed at decision time (the last sell price) and does not appear to have any other methodology defects."
+    },
+    {
+     "id": "FILL-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "The code correctly calculates the stop price based on the entry price and does not appear to use any information that was not available at decision time."
+    },
+    {
+     "id": "SELECT-01",
+     "has_defect": false,
+     "defect_class": "why",
+     "why": "The code does not appear to have any of the listed methodology defects."
+    },
+    {
+     "id": "TRUNC-01",
+     "has_defect": false,
+     "defect_class": "why",
+     "why": "The code does not appear to have any of the specified methodology defects."
+    },
+    {
+     "id": "HORIZON-01",
+     "has_defect": false,
+     "defect_class": "why",
+     "why": "The code correctly calculates 20-day buy-and-hold returns using historical prices."
+    },
+    {
+     "id": "STALE-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "The code uses existing data (minute bars) to compute overnight high and low, without any indication of using future information."
+    },
+    {
+     "id": "STALE-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "The code is using existing data to calculate an extreme value, which was available at decision time."
+    },
+    {
+     "id": "WINDOW-01",
+     "has_defect": false,
+     "defect_class": "why",
+     "why": "The code selects data based on time stamps that are known at decision time."
+    },
+    {
+     "id": "ORPHAN-01",
+     "has_defect": false,
+     "defect_class": "why",
+     "why": "The code correctly sums signed cash flows for each symbol group in the fill ledger."
+    },
+    {
+     "id": "REPRO-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "The code snippet does not contain any methodology defects; it appears to be an error in variable definition rather than a methodological issue."
+    },
+    {
+     "id": "CACHE-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "The code correctly handles exceptions when fetching earnings dates and caches them for future use."
+    },
+    {
+     "id": "ASYM-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "The code correctly labels trade outcomes based on whether the target was hit or if the stop condition was met."
+    },
+    {
+     "id": "BASELINE-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "The code reports summary statistics of past returns without using any information that did not exist at decision time."
+    },
+    {
+     "id": "CLEAN-01",
+     "has_defect": true,
+     "defect_class": "stale_input_data",
+     "why": "The code uses future values of `df.close` to compute forward returns, which did not exist at decision time."
+    },
+    {
+     "id": "CLEAN-02",
+     "has_defect": true,
+     "defect_class": "stale_input_data",
+     "why": "The code uses future data (2025-06-01) to split the dataset into training and testing sets."
+    },
+    {
+     "id": "CLEAN-03",
+     "has_defect": true,
+     "defect_class": "stale_input_data",
+     "why": "The code uses `prior_dates[-20:]` which implies that it is using information about future dates to make decisions about past data."
+    },
+    {
+     "id": "CLEAN-04",
+     "has_defect": false,
+     "defect_class": "why",
+     "why": "The code uses bootstrapping to estimate uncertainty, which is an appropriate method for reporting results with uncertainty."
+    }
+   ]
+  },
+  "baseline:always-yes": {
+   "accuracy": 0.78125,
+   "precision": 0.78125,
+   "recall": 1.0,
+   "f1": 0.8771929824561403,
+   "ci": [
+    0.625,
+    0.90625
+   ],
+   "errors": 0,
+   "explanation_accuracy": 0.0,
+   "predictions": [
+    {
+     "id": "LOOKAHEAD-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "LOOKAHEAD-02",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "LOOKAHEAD-03",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "MULTCOMP-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "MULTCOMP-02",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "MULTCOMP-03",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLUSTER-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLUSTER-02",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "SELFTEST-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "SELFTEST-02",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "UNITS-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "UNITS-02",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "SEASONAL-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "TIES-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "GROUPKEY-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "MARK-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "FILL-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "SELECT-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "TRUNC-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "HORIZON-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "STALE-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "STALE-02",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "WINDOW-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "ORPHAN-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "REPRO-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CACHE-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "ASYM-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "BASELINE-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLEAN-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLEAN-02",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLEAN-03",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLEAN-04",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "asserted without looking."
+    }
+   ]
+  },
+  "baseline:always-no": {
+   "accuracy": 0.21875,
+   "precision": NaN,
+   "recall": 0.0,
+   "f1": NaN,
+   "ci": [
+    0.09375,
+    0.375
+   ],
+   "errors": 0,
+   "explanation_accuracy": NaN,
+   "predictions": [
+    {
+     "id": "LOOKAHEAD-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "LOOKAHEAD-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "LOOKAHEAD-03",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "MULTCOMP-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "MULTCOMP-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "MULTCOMP-03",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLUSTER-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLUSTER-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "SELFTEST-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "SELFTEST-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "UNITS-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "UNITS-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "SEASONAL-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "TIES-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "GROUPKEY-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "MARK-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "FILL-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "SELECT-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "TRUNC-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "HORIZON-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "STALE-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "STALE-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "WINDOW-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "ORPHAN-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "REPRO-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CACHE-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "ASYM-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "BASELINE-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLEAN-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLEAN-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLEAN-03",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    },
+    {
+     "id": "CLEAN-04",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "asserted without looking."
+    }
+   ]
+  },
+  "baseline:random": {
+   "accuracy": 0.40625,
+   "precision": 0.75,
+   "recall": 0.36,
+   "f1": 0.48648648648648657,
+   "ci": [
+    0.25,
+    0.5625
+   ],
+   "errors": 0,
+   "explanation_accuracy": 0.0,
+   "predictions": [
+    {
+     "id": "LOOKAHEAD-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "LOOKAHEAD-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "LOOKAHEAD-03",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "MULTCOMP-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "MULTCOMP-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "MULTCOMP-03",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "CLUSTER-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "CLUSTER-02",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "SELFTEST-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "SELFTEST-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "UNITS-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "UNITS-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "SEASONAL-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "TIES-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "GROUPKEY-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "MARK-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "FILL-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "SELECT-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "TRUNC-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "HORIZON-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "STALE-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "STALE-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "WINDOW-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "ORPHAN-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "REPRO-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "CACHE-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "ASYM-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "BASELINE-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "CLEAN-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "CLEAN-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    },
+    {
+     "id": "CLEAN-03",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "coin flip."
+    },
+    {
+     "id": "CLEAN-04",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "coin flip."
+    }
+   ]
+  },
+  "baseline:keyword": {
+   "accuracy": 0.53125,
+   "precision": 0.8571428571428571,
+   "recall": 0.48,
+   "f1": 0.6153846153846153,
+   "ci": [
+    0.375,
+    0.71875
+   ],
+   "errors": 0,
+   "explanation_accuracy": 0.0,
+   "predictions": [
+    {
+     "id": "LOOKAHEAD-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "LOOKAHEAD-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "LOOKAHEAD-03",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "MULTCOMP-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "MULTCOMP-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "MULTCOMP-03",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "CLUSTER-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "CLUSTER-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "SELFTEST-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "SELFTEST-02",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "UNITS-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "UNITS-02",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "SEASONAL-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "TIES-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "GROUPKEY-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "MARK-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "FILL-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "SELECT-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "TRUNC-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "HORIZON-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "STALE-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "STALE-02",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "WINDOW-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "ORPHAN-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "REPRO-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "CACHE-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "ASYM-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "BASELINE-01",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "CLEAN-01",
+     "has_defect": true,
+     "defect_class": "unknown",
+     "why": "keyword match."
+    },
+    {
+     "id": "CLEAN-02",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "CLEAN-03",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    },
+    {
+     "id": "CLEAN-04",
+     "has_defect": false,
+     "defect_class": "none",
+     "why": "keyword match."
+    }
+   ]
+  }
+ }
+}
